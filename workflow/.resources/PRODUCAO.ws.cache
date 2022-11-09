@@ -1,0 +1,868 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_341" class="java.beans.XMLDecoder">
+ <object class="java.util.HashMap">
+  <void method="put">
+   <string>volume</string>
+   <array class="java.lang.String" length="1">
+    <void index="0">
+     <string>Default</string>
+    </void>
+   </array>
+  </void>
+  <void method="put">
+   <string>mecanismoGrupo</string>
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Administradores</string>
+      </void>
+      <void property="groupId">
+       <string>admin</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Default</string>
+      </void>
+      <void property="groupId">
+       <string>Default</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>DIRETORIA CENTRAL</string>
+      </void>
+      <void property="groupId">
+       <string>01.001</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>GESTAO COMERCIAL NOVOS NEGOCIOS</string>
+      </void>
+      <void property="groupId">
+       <string>01.002</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>PLANEJAMENTO E ORCAMENTO CENTRAL</string>
+      </void>
+      <void property="groupId">
+       <string>01.003</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>MARKETING CENTRAL</string>
+      </void>
+      <void property="groupId">
+       <string>01.004</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>CENTRAL DE EQUIPAMENTOS - ES</string>
+      </void>
+      <void property="groupId">
+       <string>02.010</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ALMOXARIFADO CENTRAL</string>
+      </void>
+      <void property="groupId">
+       <string>01.005</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>COMPRAS CENTRAL</string>
+      </void>
+      <void property="groupId">
+       <string>01.006</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>OFICINA SÃO LUIS - MA</string>
+      </void>
+      <void property="groupId">
+       <string>02.011</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>PATRIMONIO CENTRAL</string>
+      </void>
+      <void property="groupId">
+       <string>01.007</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>OFICINA AÇAILÂNDIA - MA</string>
+      </void>
+      <void property="groupId">
+       <string>02.012</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>FINANCEIRO CENTRAL</string>
+      </void>
+      <void property="groupId">
+       <string>01.008</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>OFICINA VP AÇAILÂNDIA - MA</string>
+      </void>
+      <void property="groupId">
+       <string>02.013</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>CONTABILIDADE CENTRAL</string>
+      </void>
+      <void property="groupId">
+       <string>01.009</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>JURIDICO CENTRAL</string>
+      </void>
+      <void property="groupId">
+       <string>02.014</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>DEPARTAMENTO PESSOAL CENTRAL</string>
+      </void>
+      <void property="groupId">
+       <string>01.010</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>OFICINA FERNANDOPOLIS-SP</string>
+      </void>
+      <void property="groupId">
+       <string>02.015</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>RECURSOS HUMANOS CENTRAL</string>
+      </void>
+      <void property="groupId">
+       <string>01.011</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>BORRACHARIA CENTRAL</string>
+      </void>
+      <void property="groupId">
+       <string>02.016</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>107 - CONSORCIO BARREIRAS - VALEC</string>
+      </void>
+      <void property="groupId">
+       <string>03.107</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>SESMT CENTRAL</string>
+      </void>
+      <void property="groupId">
+       <string>01.012</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>264 - RUMO - AMPLIAÇÃO DE 15 PATIOS</string>
+      </void>
+      <void property="groupId">
+       <string>03.264</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>265 - DER - XURI</string>
+      </void>
+      <void property="groupId">
+       <string>03.265</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>TECNOLOGIA DA INFORMACAO CENTRAL</string>
+      </void>
+      <void property="groupId">
+       <string>01.013</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>268 - VALE - MANUTENCAO DE VIAS - 2019</string>
+      </void>
+      <void property="groupId">
+       <string>03.268</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>269 - VALE - RECUPERAÇÃO DE AREA EMERSA DA PRAIA DE CAMBURI</string>
+      </void>
+      <void property="groupId">
+       <string>03.269</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>SEDE - USO COLETIVO</string>
+      </void>
+      <void property="groupId">
+       <string>01.014</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>273 - VALE - CORREÇÃO GEOMETRICA EFVM</string>
+      </void>
+      <void property="groupId">
+       <string>03.273</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>282 - VALE - BERMAS E CAMINHO DE ROLAMENTO TPPM</string>
+      </void>
+      <void property="groupId">
+       <string>03.282</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>CONTROLE TECNICO CENTRAL</string>
+      </void>
+      <void property="groupId">
+       <string>01.015</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>288 - VALE - PAVIMENT. DAS CABECEIRAS DOS PÁTIOS DE TUBARAO</string>
+      </void>
+      <void property="groupId">
+       <string>03.288</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>SERVICOS GERAIS CENTRAL</string>
+      </void>
+      <void property="groupId">
+       <string>01.016</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>290 - VALE - RENOVAÇÃO VIII - 2022</string>
+      </void>
+      <void property="groupId">
+       <string>03.290</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ADMINISTRAÇÃO - SÃO LUIS - MA</string>
+      </void>
+      <void property="groupId">
+       <string>01.017</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>291 - VALE - WIND FENCE PMI</string>
+      </void>
+      <void property="groupId">
+       <string>03.291</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>PATRIMONIO BAIXADO - 2022</string>
+      </void>
+      <void property="groupId">
+       <string>01.018</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>292 - RUMO - CORREÇÃO GEOMÉTRICA 2022</string>
+      </void>
+      <void property="groupId">
+       <string>03.292</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ALOJAMENTO/CASA/REPUBLICA</string>
+      </void>
+      <void property="groupId">
+       <string>01.020</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>293 - VALE - EXECUÇÃO DE VIADUTOS (VR51 E VR161) - MA</string>
+      </void>
+      <void property="groupId">
+       <string>03.293</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>PATRIMONIO/TRAFEGO</string>
+      </void>
+      <void property="groupId">
+       <string>01.021</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>USINA DE ASFALTO - VILA VELHA</string>
+      </void>
+      <void property="groupId">
+       <string>04.001</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>USINA DE ASFALTO - SERRA</string>
+      </void>
+      <void property="groupId">
+       <string>04.002</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>EXPANSAO</string>
+      </void>
+      <void property="groupId">
+       <string>01.022</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>OFICINA CENTRAL</string>
+      </void>
+      <void property="groupId">
+       <string>02.001</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>USINA DE SOLOS</string>
+      </void>
+      <void property="groupId">
+       <string>04.003</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>CAMARA/POSTO/CASA</string>
+      </void>
+      <void property="groupId">
+       <string>02.002</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>CHACARA PARREIRAL</string>
+      </void>
+      <void property="groupId">
+       <string>02.003</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>FAZENDA AÇA</string>
+      </void>
+      <void property="groupId">
+       <string>99.039</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>FAZENDA SANTA JOANA</string>
+      </void>
+      <void property="groupId">
+       <string>99.040</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>SEDE PELICANO</string>
+      </void>
+      <void property="groupId">
+       <string>02.004</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>FAZENDA SANTA ROSA</string>
+      </void>
+      <void property="groupId">
+       <string>99.070</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>TRAFEGO CENTRAL</string>
+      </void>
+      <void property="groupId">
+       <string>02.005</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>EXOTIC GRANITO</string>
+      </void>
+      <void property="groupId">
+       <string>99.077</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>TORNEARIA E USINAGEM CENTRAL</string>
+      </void>
+      <void property="groupId">
+       <string>02.006</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>CENTRAL DE EQUIPAMENTOS NORTE</string>
+      </void>
+      <void property="groupId">
+       <string>99.086</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>GERENCIA OFICINA CENTRAL</string>
+      </void>
+      <void property="groupId">
+       <string>02.007</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>ADM/CONTROLE OFICINA CENTRAL</string>
+      </void>
+      <void property="groupId">
+       <string>02.008</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>REUNIAO OFICINA</string>
+      </void>
+      <void property="groupId">
+       <string>02.009</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>PATRIMÔNIO</string>
+      </void>
+      <void property="groupId">
+       <string>99</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>283 - RUMO - CONSORCIO PELICANO X CMC</string>
+      </void>
+      <void property="groupId">
+       <string>03.283</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>268 - VIRTUAL -  VALE - MANUTENCAO DE VIAS - 2019</string>
+      </void>
+      <void property="groupId">
+       <string>05.268</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>265 - VIRTUAL -  DER - XURI</string>
+      </void>
+      <void property="groupId">
+       <string>05.265</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>283 - VIRTUAL - RUMO - CONSORCIO PELICANO X CMC</string>
+      </void>
+      <void property="groupId">
+       <string>05.283</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>288 - VIRTUAL - VALE - PAVIMENT. DAS CABECEIRAS DOS PÁTIOS DE TUBARAO</string>
+      </void>
+      <void property="groupId">
+       <string>05.288</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>03.295 - VALE - CAMINHO DE ROLAMENTO - MINA DE CONCEIÇÃO - ITABIRA-MG</string>
+      </void>
+      <void property="groupId">
+       <string>03.295</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>297 - VALE - MANUTENÇÃO DE VIAS 2022</string>
+      </void>
+      <void property="groupId">
+       <string>03.297</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>03.296 - VALE - DRENAGEM TPD</string>
+      </void>
+      <void property="groupId">
+       <string>03.296</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.GroupDto">
+      <void property="groupDescription">
+       <string>Gestores</string>
+      </void>
+      <void property="groupId">
+       <string>Gestores</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>expediente</string>
+   <array class="java.lang.String" length="1">
+    <void index="0">
+     <string>Default</string>
+    </void>
+   </array>
+  </void>
+  <void method="put">
+   <string>processosServidor</string>
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.ProcessDefinitionDto">
+      <void property="companyId">
+       <int>1</int>
+      </void>
+      <void property="processDescription">
+       <string>CBI</string>
+      </void>
+      <void property="processId">
+       <string>CBI</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.ProcessDefinitionDto">
+      <void property="companyId">
+       <int>1</int>
+      </void>
+      <void property="processDescription">
+       <string>Listar Tarefas</string>
+      </void>
+      <void property="processId">
+       <string>FLUIGADHOC</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.ProcessDefinitionDto">
+      <void property="companyId">
+       <int>1</int>
+      </void>
+      <void property="processDescription">
+       <string>Responsabilidade_Patrimonio</string>
+      </void>
+      <void property="processId">
+       <string>Responsabilidade_Patrimonio</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.totvs.tds.ecm.foundation.ws.ProcessDefinitionDto">
+      <void property="companyId">
+       <int>1</int>
+      </void>
+      <void property="processDescription">
+       <string>transferencia_patrimonio</string>
+      </void>
+      <void property="processId">
+       <string>TransferenciaDePatrimonio</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>mecanismo</string>
+   <array class="[Ljava.lang.Object;" length="9">
+    <void index="0">
+     <array class="java.lang.Object" length="2">
+      <void index="0">
+       <string>Atribuição por Associação</string>
+      </void>
+      <void index="1">
+       <string>Associado</string>
+      </void>
+     </array>
+    </void>
+    <void index="1">
+     <array class="java.lang.Object" length="2">
+      <void index="0">
+       <string>Atribuição por Campo de Formulário</string>
+      </void>
+      <void index="1">
+       <string>Campo Formulário</string>
+      </void>
+     </array>
+    </void>
+    <void index="2">
+     <array class="java.lang.Object" length="2">
+      <void index="0">
+       <string>Atribuição por Executor de Atividade</string>
+      </void>
+      <void index="1">
+       <string>Executor Atividade</string>
+      </void>
+     </array>
+    </void>
+    <void index="3">
+     <array class="java.lang.Object" length="2">
+      <void index="0">
+       <string>Atribuição por Grupo</string>
+      </void>
+      <void index="1">
+       <string>Grupo</string>
+      </void>
+     </array>
+    </void>
+    <void index="4">
+     <array class="java.lang.Object" length="2">
+      <void index="0">
+       <string>Atribuição por Grupos do Colaborador</string>
+      </void>
+      <void index="1">
+       <string>Grupos Colaborador</string>
+      </void>
+     </array>
+    </void>
+    <void index="5">
+     <array class="java.lang.Object" length="2">
+      <void index="0">
+       <string>Atribuição por Papel</string>
+      </void>
+      <void index="1">
+       <string>Papel</string>
+      </void>
+     </array>
+    </void>
+    <void index="6">
+     <array class="java.lang.Object" length="2">
+      <void index="0">
+       <string>Atribuição para um Grupo</string>
+      </void>
+      <void index="1">
+       <string>Pool Grupo</string>
+      </void>
+     </array>
+    </void>
+    <void index="7">
+     <array class="java.lang.Object" length="2">
+      <void index="0">
+       <string>Atribuição para um Papel</string>
+      </void>
+      <void index="1">
+       <string>Pool Papel</string>
+      </void>
+     </array>
+    </void>
+    <void index="8">
+     <array class="java.lang.Object" length="2">
+      <void index="0">
+       <string>Atribuição por Usuário</string>
+      </void>
+      <void index="1">
+       <string>Usuário</string>
+      </void>
+     </array>
+    </void>
+   </array>
+  </void>
+ </object>
+</java>

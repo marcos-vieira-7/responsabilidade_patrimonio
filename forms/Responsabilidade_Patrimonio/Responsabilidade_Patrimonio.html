@@ -1,0 +1,485 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+
+	<link type="text/css" rel="stylesheet" href="/style-guide/css/fluig-style-guide.min.css"/>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+	<script type="text/javascript" src="/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+
+	<!-- meus scripts -->	
+	<script type="text/javascript" src="/webdesk/vcXMLRPC.js"></script>
+	<script type="text/javascript" src="js/regras_formulario.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/script.js" charset="utf-8"></script>
+	<link type="text/css" rel="stylesheet" href="css/estilo.css" charset="utf-8"/>
+
+</head>
+
+
+<body>
+
+<div id="conteudo" class="fluig-style-guide">
+
+<form name="form" role="form">
+
+<input type="hidden" name="gravouNoRM" id="gravouNoRM" value="nao">
+<header id="cabecalho_formulario">
+	<div class="celulas_cabecalho" id="div_logo_pelicano">
+		<img id="logo_pelicano" src="imagens/pelicano.png" height="70">
+	</div>
+	<div class="celulas_cabecalho" style="width: 50%;">
+		<h3 style="color: black; text-align: center">Termo de Responsabilidade Individual de Patrimônio</h3>
+	</div>
+	<div class="celulas_cabecalho">
+		<div class="data_emissao" style="border-bottom: 1px solid #bbb;">
+			DATA EMISSÃO
+		</div>
+		<div id="data_emissao">
+			<input type="text" name="dataEmissao" id="dataEmissao" readonly style="border: 0; outline 0; text-align: center;">
+		</div>
+	</div>
+</header>
+
+
+<div>
+	<input type="hidden" class="form-control" placeholder="obra" name="matricula_gestor_obra" id="matricula_gestor_obra">
+	<input type="hidden" class="form-control" placeholder="Ultimo notificado" name="ultimo_notificado" id="ultimo_notificado">
+	<input type="hidden" class="form-control" placeholder="Email gestor solicitante" name="email_gestor" id="email_gestor">
+	<input type="hidden" class="form-control" placeholder="matricula solicitante" name="matricula_solicitante" id="matricula_solicitante">
+	<input type="hidden" class="form-control" placeholder="matricula gestor solicitante" name="matricula_gestor_solicitante" id="matricula_gestor_solicitante">
+	<input type="hidden" class="form-control" placeholder="matricula gestor destino" name="matricula_gestor_destino" id="matricula_gestor_destino">
+	<input type="hidden" class="form-control" placeholder="Email gestor destino" name="email_responsavel" id="email_responsavel">
+</div>
+
+
+<div class="div_frame">
+	<!--<strong>Obra: </strong>  <label id="obraCodigo" style="color: black; text-align: center;"></label> <br>	-->
+	<strong>Usuário: </strong> <label name="usuario_logado" id="usuario_logado"></label> <br>
+	<div id="div_coligada">
+		<textarea name="nome_coligada" id="nome_coligada" readonly></textarea>
+		<input style="display: none;" name="numero_coligada" id="numero_coligada">
+	</div>
+</div>
+
+
+<div id="div_aprovacao">
+
+	<div class="card_aprovacao" id="card_aprovacao_patrimonio">
+		<label id="label_patrimonio_aprovacao">Patrimônio <i class="flaticon icon-sm" aria-hidden="true"></i></label>
+		<input type="text" class="form-control input_nome_aprovador" name="nome_patrimonio_aprovador" id="nome_patrimonio_aprovador" style="height: 20px; border: 0px; box-shadow: 0px 0px 0px 0px; background-color: white; text-align: left; padding: 0px; font-weight: bold; color: #1eaad9; white-space: nowrap; width: 150px; overflow: hidden; text-overflow: ellipsis;" readonly>
+		<input type="text" class="form-control" name="decisao_patrimonio_data_hora" id="decisao_patrimonio_data_hora" style="height: 20px; border: 0px; box-shadow: 0px 0px 0px 0px; background-color: white; text-align: left; padding: 0px;" readonly>
+		
+		<div id="div_select_aprovacao_patrimonio">
+			<select class="form-control" name="aprovacao_patrimonio" id="aprovacao_patrimonio" onchange="definir_aprovacao_patrimonio()">
+				<option hidden>Selecione aprovação</option>
+				<option value="Aprovado">Aprovado</option>
+				<option value="Reprovado">Reprovado</option>
+			</select>
+		</div>
+	</div>
+
+</div>
+
+<div id="div_justificativa_reprovacao">
+	<label for="justificativa_reprovacao">Justificativa de Reprovação:</label>
+	<textarea type="text" class="form-control" name="justificativa_reprovacao" id="justificativa_reprovacao" rows="4"></textarea>
+</div>
+
+<br>
+
+
+
+<!-- Informar o novo responsável -->
+<br>
+	<label>Novo Responsável</label>
+	<input type="text" class="form-control" placeholder="Novo Responsável" onfocus="escolher_responsavel(1)" name="responsavel_novo" id="responsavel_novo">
+	<div class="col-md-3"><input type="hidden" class="form-control" placeholder="CHAPA" name="chapa_novo_responsavel" id="chapa_novo_responsavel" style="background-color: #f5f5f5" readonly></div>
+<br>
+
+<div class="bts_add_remover_item">
+	<label></label>
+	<button id="bt_add_item" class="btn btn-info" style="padding: 5px 7px; margin-right: 10px;" onclick="add_item_tabela()"><i class="flaticon flaticon-add-plus icon-md" aria-hidden="true"></i></button>
+	<button id="bt_remover_item" class="btn btn-danger disabled" style="padding: 5px 7px;" onclick="remover_item_tabela()"><i class="flaticon flaticon-minus icon-md" aria-hidden="true"></i></button>
+</div>
+
+
+<div class="conteudo_patrimonios">
+
+		<div id="item_1" class="panel panel-info">
+			<div class="panel-heading" style="padding: 10px 25px;"><i class="flaticon flaticon-converter icon-md" aria-hidden="true"></i></div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-7 atributos_patrimonio"><label>Patrimônio:</label><input type="text" class="form-control nomes_patrimonios" placeholder="Selecione o Patrimônio" onfocus="escolher_patrimonio(1)" name="patrimonio_1" id="patrimonio_1"></div>
+					<div class="col-md-5"><label>Localização:<label id="localizacaoSemGestor" style="font-weight: bold; background-color: red; color: white; border-radius: 5px; margin-bottom: 0px; display: none; margin-left: 10px; padding: 0px 10px;">Obra sem gestor cadastrado</label></label><input type="text" class="form-control" placeholder="Local" name="local_1" id="local_1" style="background-color: #f5f5f5" readonly></div>
+				</div>
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-3 atributos_patrimonio"><label>Marca:</label><input type="text" class="form-control" placeholder="Marca" name="marca_1" id="marca_1" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3 atributos_patrimonio"><label>Modelo:</label><input type="text" class="form-control" placeholder="Modelo" name="modelo_1" id="modelo_1" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3 atributos_patrimonio"><label>Placa:</label><input type="text" class="form-control" placeholder="Placa" name="placa_1" id="placa_1" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3 atributos_patrimonio"><label>Série:</label><input type="text" class="form-control" placeholder="Série" name="serie_1" id="serie_1" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3 atributos_patrimonio"><label>Responsável Atual</label><input type="text" class="form-control" placeholder="Responsável" name="responsavel_1" id="responsavel_1" style="background-color: #f5f5f5" readonly></div>
+					
+				</div>
+				<div class="row" style="margin-top: 10px; display:none;">
+					<div class="col-md-3"><label>IDPATRIMONIO:</label><input type="text" class="form-control" placeholder="IDPATRIMÔNIO" name="idpatrimonio_1" id="idpatrimonio_1" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3"><label>CODCOLIGADA:</label><input type="text" class="form-control" placeholder="CODCOLIGADA" name="codcoligada_1" id="codcoligada_1" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3"><label>CODFILIAL:</label><input type="text" class="form-control" placeholder="CODFILIAL" name="codfilial_1" id="codfilial_1" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3"><label>CODPATRIMÔNIO:</label><input type="text" class="form-control" placeholder="CODPATRIMÔNIO" name="codpatrimonio_1" id="codpatrimonio_1" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3"><label>CHAPA:</label><input type="text" class="form-control" placeholder="CHAPA" name="chapa_1" id="chapa_1" style="background-color: #f5f5f5" readonly></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="item_2" class="panel panel-info" style="display: none;">
+			<div class="panel-heading" style="padding: 10px 25px;"><i class="flaticon flaticon-converter icon-md" aria-hidden="true"></i></div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-7 atributos_patrimonio"><label>Patrimônio:</label><input type="text" class="form-control nomes_patrimonios" placeholder="Selecione o Patrimônio" onfocus="escolher_patrimonio(2)" name="patrimonio_2" id="patrimonio_2"></div>
+					<div class="col-md-5"><label>Localização:</label><input type="text" class="form-control" placeholder="Local" name="local_2" id="local_2" style="background-color: #f5f5f5" readonly></div>
+				</div>
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-3 atributos_patrimonio"><label>Marca:</label><input type="text" class="form-control" placeholder="Marca" name="marca_2" id="marca_2" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3 atributos_patrimonio"><label>Modelo:</label><input type="text" class="form-control" placeholder="Modelo" name="modelo_2" id="modelo_2" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3 atributos_patrimonio"><label>Placa:</label><input type="text" class="form-control" placeholder="Placa" name="placa_2" id="placa_2" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3 atributos_patrimonio"><label>Série:</label><input type="text" class="form-control" placeholder="Série" name="serie_2" id="serie_2" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3 atributos_patrimonio"><label>Responsável Atual</label><input type="text" class="form-control" placeholder="Responsável" name="responsavel_2" id="responsavel_2" style="background-color: #f5f5f5" readonly></div>
+				</div>
+				<div class="row" style="margin-top: 10px; display:none;">
+					<div class="col-md-3"><label>IDPATRIMONIO:</label><input type="text" class="form-control" placeholder="IDPATRIMÔNIO" name="idpatrimonio_2" id="idpatrimonio_2" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3"><label>CODCOLIGADA:</label><input type="text" class="form-control" placeholder="CODCOLIGADA" name="codcoligada_2" id="codcoligada_2" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3"><label>CODFILIAL:</label><input type="text" class="form-control" placeholder="CODFILIAL" name="codfilial_2" id="codfilial_2" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3"><label>CODPATRIMÔNIO:</label><input type="text" class="form-control" placeholder="CODPATRIMÔNIO" name="codpatrimonio_2" id="codpatrimonio_2" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3"><label>CHAPA:</label><input type="text" class="form-control" placeholder="CHAPA" name="chapa_2" id="chapa_2" style="background-color: #f5f5f5" readonly></div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="item_3" class="panel panel-info" style="display: none;">
+			<div class="panel-heading" style="padding: 10px 25px;"><i class="flaticon flaticon-converter icon-md" aria-hidden="true"></i></div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-7 atributos_patrimonio"><label>Patrimônio:</label><input type="text" class="form-control nomes_patrimonios" placeholder="Selecione o Patrimônio" onfocus="escolher_patrimonio(3)" name="patrimonio_3" id="patrimonio_3"></div>
+					<div class="col-md-5"><label>Localização:</label><input type="text" class="form-control" placeholder="Local" name="local_3" id="local_3" style="background-color: #f5f5f5" readonly></div>
+				</div>
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-3 atributos_patrimonio"><label>Marca:</label><input type="text" class="form-control" placeholder="Marca" name="marca_3" id="marca_3" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3 atributos_patrimonio"><label>Modelo:</label><input type="text" class="form-control" placeholder="Modelo" name="modelo_3" id="modelo_3" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3 atributos_patrimonio"><label>Placa:</label><input type="text" class="form-control" placeholder="Placa" name="placa_3" id="placa_3" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3 atributos_patrimonio"><label>Série:</label><input type="text" class="form-control" placeholder="Série" name="serie_3" id="serie_3" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3 atributos_patrimonio"><label>Responsável Atual</label><input type="text" class="form-control" placeholder="Responsável" name="responsavel_3" id="responsavel_3" style="background-color: #f5f5f5" readonly></div>
+				</div>
+				<div class="row" style="margin-top: 10px; display:none;">
+					<div class="col-md-3"><label>IDPATRIMONIO:</label><input type="text" class="form-control" placeholder="IDPATRIMÔNIO" name="idpatrimonio_3" id="idpatrimonio_3" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3"><label>CODCOLIGADA:</label><input type="text" class="form-control" placeholder="CODCOLIGADA" name="codcoligada_3" id="codcoligada_3" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3"><label>CODFILIAL:</label><input type="text" class="form-control" placeholder="CODFILIAL" name="codfilial_3" id="codfilial_3" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3"><label>CODPATRIMÔNIO:</label><input type="text" class="form-control" placeholder="CODPATRIMÔNIO" name="codpatrimonio_3" id="codpatrimonio_3" style="background-color: #f5f5f5" readonly></div>
+					<div class="col-md-3"><label>CHAPA:</label><input type="text" class="form-control" placeholder="CHAPA" name="chapa_3" id="chapa_3" style="background-color: #f5f5f5" readonly></div>			
+				</div>
+			</div>
+		</div>
+	
+	
+	<div id="item_4" class="panel panel-info" style="display: none;">
+		<div class="panel-heading" style="padding: 10px 25px;"><i class="flaticon flaticon-converter icon-md" aria-hidden="true"></i></div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-7 atributos_patrimonio"><label>Patrimônio:</label><input type="text" class="form-control nomes_patrimonios" placeholder="Selecione o Patrimônio" onfocus="escolher_patrimonio(4)" name="patrimonio_4" id="patrimonio_4"></div>
+				<div class="col-md-5"><label>Localização:</label><input type="text" class="form-control" placeholder="Local" name="local_4" id="local_4" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-md-3 atributos_patrimonio"><label>Marca:</label><input type="text" class="form-control" placeholder="Marca" name="marca_4" id="marca_4" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Modelo:</label><input type="text" class="form-control" placeholder="Modelo" name="modelo_4" id="modelo_4" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Placa:</label><input type="text" class="form-control" placeholder="Placa" name="placa_4" id="placa_4" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Série:</label><input type="text" class="form-control" placeholder="Série" name="serie_4" id="serie_4" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Responsável Atual</label><input type="text" class="form-control" placeholder="Responsável" name="responsavel_4" id="responsavel_4" style="background-color: #f5f5f5" readonly></div>			
+			</div>
+			<div class="row" style="margin-top: 10px; display:none;">
+				<div class="col-md-3"><label>IDPATRIMONIO:</label><input type="text" class="form-control" placeholder="IDPATRIMÔNIO" name="idpatrimonio_4" id="idpatrimonio_4" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODCOLIGADA:</label><input type="text" class="form-control" placeholder="CODCOLIGADA" name="codcoligada_4" id="codcoligada_4" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODFILIAL:</label><input type="text" class="form-control" placeholder="CODFILIAL" name="codfilial_4" id="codfilial_4" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODPATRIMÔNIO:</label><input type="text" class="form-control" placeholder="CODPATRIMÔNIO" name="codpatrimonio_4" id="codpatrimonio_4" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CHAPA:</label><input type="text" class="form-control" placeholder="CHAPA" name="chapa_4" id="chapa_4" style="background-color: #f5f5f5" readonly></div>			
+			</div>
+		</div>
+	</div>
+	
+	<div id="item_5" class="panel panel-info" style="display: none;">
+		<div class="panel-heading" style="padding: 10px 25px;"><i class="flaticon flaticon-converter icon-md" aria-hidden="true"></i></div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-7 atributos_patrimonio"><label>Patrimônio:</label><input type="text" class="form-control nomes_patrimonios" placeholder="Selecione o Patrimônio" onfocus="escolher_patrimonio(5)" name="patrimonio_5" id="patrimonio_5"></div>
+				<div class="col-md-5"><label>Localização:</label><input type="text" class="form-control" placeholder="Local" name="local_5" id="local_5" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-md-3 atributos_patrimonio"><label>Marca:</label><input type="text" class="form-control" placeholder="Marca" name="marca_5" id="marca_5" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Modelo:</label><input type="text" class="form-control" placeholder="Modelo" name="modelo_5" id="modelo_5" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Placa:</label><input type="text" class="form-control" placeholder="Placa" name="placa_5" id="placa_5" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Série:</label><input type="text" class="form-control" placeholder="Série" name="serie_5" id="serie_5" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Responsável Atual</label><input type="text" class="form-control" placeholder="Responsável" name="responsavel_5" id="responsavel_5" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px; display:none;">
+				<div class="col-md-3"><label>IDPATRIMONIO:</label><input type="text" class="form-control" placeholder="IDPATRIMÔNIO" name="idpatrimonio_5" id="idpatrimonio_5" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODCOLIGADA:</label><input type="text" class="form-control" placeholder="CODCOLIGADA" name="codcoligada_5" id="codcoligada_5" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODFILIAL:</label><input type="text" class="form-control" placeholder="CODFILIAL" name="codfilial_5" id="codfilial_5" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODPATRIMÔNIO:</label><input type="text" class="form-control" placeholder="CODPATRIMÔNIO" name="codpatrimonio_5" id="codpatrimonio_5" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CHAPA:</label><input type="text" class="form-control" placeholder="CHAPA" name="chapa_5" id="chapa_5" style="background-color: #f5f5f5" readonly></div>			
+			
+			</div>
+		</div>
+	</div>
+	
+	<div id="item_6" class="panel panel-info" style="display: none;">
+		<div class="panel-heading" style="padding: 10px 25px;"><i class="flaticon flaticon-converter icon-md" aria-hidden="true"></i></div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-7 atributos_patrimonio"><label>Patrimônio:</label><input type="text" class="form-control nomes_patrimonios" placeholder="Selecione o Patrimônio" onfocus="escolher_patrimonio(6)" name="patrimonio_6" id="patrimonio_6"></div>
+				<div class="col-md-5"><label>Localização:</label><input type="text" class="form-control" placeholder="Local" name="local_6" id="local_6" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-md-3 atributos_patrimonio"><label>Marca:</label><input type="text" class="form-control" placeholder="Marca" name="marca_6" id="marca_6" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Modelo:</label><input type="text" class="form-control" placeholder="Modelo" name="modelo_6" id="modelo_6" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Placa:</label><input type="text" class="form-control" placeholder="Placa" name="placa_6" id="placa_6" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Série:</label><input type="text" class="form-control" placeholder="Série" name="serie_6" id="serie_6" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Responsável Atual</label><input type="text" class="form-control" placeholder="Responsável" name="responsavel_6" id="responsavel_6" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px; display:none;">
+				<div class="col-md-3"><label>IDPATRIMONIO:</label><input type="text" class="form-control" placeholder="IDPATRIMÔNIO" name="idpatrimonio_6" id="idpatrimonio_6" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODCOLIGADA:</label><input type="text" class="form-control" placeholder="CODCOLIGADA" name="codcoligada_6" id="codcoligada_6" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODFILIAL:</label><input type="text" class="form-control" placeholder="CODFILIAL" name="codfilial_6" id="codfilial_6" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODPATRIMÔNIO:</label><input type="text" class="form-control" placeholder="CODPATRIMÔNIO" name="codpatrimonio_6" id="codpatrimonio_6" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CHAPA:</label><input type="text" class="form-control" placeholder="CHAPA" name="chapa_6" id="chapa_6" style="background-color: #f5f5f5" readonly></div>			
+
+			</div>
+		</div>
+	</div>
+	
+	<div id="item_7" class="panel panel-info" style="display: none;">
+		<div class="panel-heading" style="padding: 10px 25px;"><i class="flaticon flaticon-converter icon-md" aria-hidden="true"></i></div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-7 atributos_patrimonio"><label>Patrimônio:</label><input type="text" class="form-control nomes_patrimonios" placeholder="Selecione o Patrimônio" onfocus="escolher_patrimonio(7)" name="patrimonio_7" id="patrimonio_7"></div>
+				<div class="col-md-5"><label>Localização:</label><input type="text" class="form-control" placeholder="Local" name="local_7" id="local_7" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-md-3 atributos_patrimonio"><label>Marca:</label><input type="text" class="form-control" placeholder="Marca" name="marca_7" id="marca_7" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Modelo:</label><input type="text" class="form-control" placeholder="Modelo" name="modelo_7" id="modelo_7" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Placa:</label><input type="text" class="form-control" placeholder="Placa" name="placa_7" id="placa_7" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Série:</label><input type="text" class="form-control" placeholder="Série" name="serie_7" id="serie_7" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Responsável Atual</label><input type="text" class="form-control" placeholder="Responsável" name="responsavel_7" id="responsavel_7" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px; display:none;">
+				<div class="col-md-3"><label>IDPATRIMONIO:</label><input type="text" class="form-control" placeholder="IDPATRIMÔNIO" name="idpatrimonio_7" id="idpatrimonio_7" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODCOLIGADA:</label><input type="text" class="form-control" placeholder="CODCOLIGADA" name="codcoligada_7" id="codcoligada_7" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODFILIAL:</label><input type="text" class="form-control" placeholder="CODFILIAL" name="codfilial_7" id="codfilial_7" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODPATRIMÔNIO:</label><input type="text" class="form-control" placeholder="CODPATRIMÔNIO" name="codpatrimonio_7" id="codpatrimonio_7" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CHAPA:</label><input type="text" class="form-control" placeholder="CHAPA" name="chapa_7" id="chapa_7" style="background-color: #f5f5f5" readonly></div>	
+			</div>
+		</div>
+	</div>
+	
+	<div id="item_8" class="panel panel-info" style="display: none;">
+		<div class="panel-heading" style="padding: 10px 25px;"><i class="flaticon flaticon-converter icon-md" aria-hidden="true"></i></div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-7 atributos_patrimonio"><label>Patrimônio:</label><input type="text" class="form-control nomes_patrimonios" placeholder="Selecione o Patrimônio" onfocus="escolher_patrimonio(8)" name="patrimonio_8" id="patrimonio_8"></div>
+				<div class="col-md-5"><label>Localização:</label><input type="text" class="form-control" placeholder="Local" name="local_8" id="local_8" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-md-3 atributos_patrimonio"><label>Marca:</label><input type="text" class="form-control" placeholder="Marca" name="marca_8" id="marca_8" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Modelo:</label><input type="text" class="form-control" placeholder="Modelo" name="modelo_8" id="modelo_8" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Placa:</label><input type="text" class="form-control" placeholder="Placa" name="placa_8" id="placa_8" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Série:</label><input type="text" class="form-control" placeholder="Série" name="serie_8" id="serie_8" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Responsável Atual</label><input type="text" class="form-control" placeholder="Responsável" name="responsavel_8" id="responsavel_8" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px; display:none;">
+				<div class="col-md-3"><label>IDPATRIMONIO:</label><input type="text" class="form-control" placeholder="IDPATRIMÔNIO" name="idpatrimonio_8" id="idpatrimonio_8" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODCOLIGADA:</label><input type="text" class="form-control" placeholder="CODCOLIGADA" name="codcoligada_8" id="codcoligada_8" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODFILIAL:</label><input type="text" class="form-control" placeholder="CODFILIAL" name="codfilial_8" id="codfilial_8" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODPATRIMÔNIO:</label><input type="text" class="form-control" placeholder="CODPATRIMÔNIO" name="codpatrimonio_8" id="codpatrimonio_8" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CHAPA:</label><input type="text" class="form-control" placeholder="CHAPA" name="chapa_8" id="chapa_8" style="background-color: #f5f5f5" readonly></div>	
+			</div>
+		</div>
+	</div>
+	
+	<div id="item_9" class="panel panel-info" style="display: none;">
+		<div class="panel-heading" style="padding: 10px 25px;"><i class="flaticon flaticon-converter icon-md" aria-hidden="true"></i></div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-7 atributos_patrimonio"><label>Patrimônio:</label><input type="text" class="form-control nomes_patrimonios" placeholder="Selecione o Patrimônio" onfocus="escolher_patrimonio(9)" name="patrimonio_9" id="patrimonio_9"></div>
+				<div class="col-md-5"><label>Localização:</label><input type="text" class="form-control" placeholder="Local" name="local_9" id="local_9" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-md-3 atributos_patrimonio"><label>Marca:</label><input type="text" class="form-control" placeholder="Marca" name="marca_9" id="marca_9" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Modelo:</label><input type="text" class="form-control" placeholder="Modelo" name="modelo_9" id="modelo_9" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Placa:</label><input type="text" class="form-control" placeholder="Placa" name="placa_9" id="placa_9" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Série:</label><input type="text" class="form-control" placeholder="Série" name="serie_9" id="serie_9" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Responsável Atual</label><input type="text" class="form-control" placeholder="Responsável" name="responsavel_9" id="responsavel_9" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px; display:none;">
+				<div class="col-md-3"><label>IDPATRIMONIO:</label><input type="text" class="form-control" placeholder="IDPATRIMÔNIO" name="idpatrimonio_9" id="idpatrimonio_9" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODCOLIGADA:</label><input type="text" class="form-control" placeholder="CODCOLIGADA" name="codcoligada_9" id="codcoligada_9" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODFILIAL:</label><input type="text" class="form-control" placeholder="CODFILIAL" name="codfilial_9" id="codfilial_9" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODPATRIMÔNIO:</label><input type="text" class="form-control" placeholder="CODPATRIMÔNIO" name="codpatrimonio_9" id="codpatrimonio_9" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CHAPA:</label><input type="text" class="form-control" placeholder="CHAPA" name="chapa_9" id="chapa_9" style="background-color: #f5f5f5" readonly></div>	
+			</div>
+		</div>
+	</div>
+	
+	<div id="item_10" class="panel panel-info" style="display: none;">
+		<div class="panel-heading" style="padding: 10px 25px;"><i class="flaticon flaticon-converter icon-md" aria-hidden="true"></i></div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-7 atributos_patrimonio"><label>Patrimônio:</label><input type="text" class="form-control nomes_patrimonios" placeholder="Selecione o Patrimï¿½nio" onfocus="escolher_patrimonio(10)" name="patrimonio_10" id="patrimonio_10"></div>
+				<div class="col-md-5"><label>Localização:</label><input type="text" class="form-control" placeholder="Local" name="local_10" id="local_10" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-md-3 atributos_patrimonio"><label>Marca:</label><input type="text" class="form-control" placeholder="Marca" name="marca_10" id="marca_10" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Modelo:</label><input type="text" class="form-control" placeholder="Modelo" name="modelo_10" id="modelo_10" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Placa:</label><input type="text" class="form-control" placeholder="Placa" name="placa_10" id="placa_10" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Série:</label><input type="text" class="form-control" placeholder="Série" name="serie_10" id="serie_10" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Responsável Atual</label><input type="text" class="form-control" placeholder="Responsável" name="responsavel_10" id="responsavel_10" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px; display:none;">
+				<div class="col-md-3"><label>IDPATRIMONIO:</label><input type="text" class="form-control" placeholder="IDPATRIMÔNIO" name="idpatrimonio_10" id="idpatrimonio_10" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODCOLIGADA:</label><input type="text" class="form-control" placeholder="CODCOLIGADA" name="codcoligada_10" id="codcoligada_10" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODFILIAL:</label><input type="text" class="form-control" placeholder="CODFILIAL" name="codfilial_10" id="codfilial_10" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODPATRIMÔNIO:</label><input type="text" class="form-control" placeholder="CODPATRIMÔNIO" name="codpatrimonio_10" id="codpatrimonio_10" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CHAPA:</label><input type="text" class="form-control" placeholder="CHAPA" name="chapa_10" id="chapa_10" style="background-color: #f5f5f5" readonly></div>	
+			</div>
+		</div>
+	</div>
+	
+	<div id="item_11" class="panel panel-info" style="display: none;">
+		<div class="panel-heading" style="padding: 10px 25px;"><i class="flaticon flaticon-converter icon-md" aria-hidden="true"></i></div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-7 atributos_patrimonio"><label>Patrimônio:</label><input type="text" class="form-control nomes_patrimonios" placeholder="Selecione o Patrimônio" onfocus="escolher_patrimonio(11)" name="patrimonio_11" id="patrimonio_11"></div>
+				<div class="col-md-5"><label>Localização:</label><input type="text" class="form-control" placeholder="Local" name="local_11" id="local_11" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-md-3 atributos_patrimonio"><label>Marca:</label><input type="text" class="form-control" placeholder="Marca" name="marca_11" id="marca_11" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Modelo:</label><input type="text" class="form-control" placeholder="Modelo" name="modelo_11" id="modelo_11" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Placa:</label><input type="text" class="form-control" placeholder="Placa" name="placa_11" id="placa_11" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Série:</label><input type="text" class="form-control" placeholder="Série" name="serie_11" id="serie_11" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Responsável Atual</label><input type="text" class="form-control" placeholder="Responsável" name="responsavel_11" id="responsavel_11" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px; display:none;">
+				<div class="col-md-3"><label>IDPATRIMONIO:</label><input type="text" class="form-control" placeholder="IDPATRIMÔNIO" name="idpatrimonio_11" id="idpatrimonio_11" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODCOLIGADA:</label><input type="text" class="form-control" placeholder="CODCOLIGADA" name="codcoligada_11" id="codcoligada_11" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODFILIAL:</label><input type="text" class="form-control" placeholder="CODFILIAL" name="codfilial_11" id="codfilial_11" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODPATRIMÔNIO:</label><input type="text" class="form-control" placeholder="CODPATRIMÔNIO" name="codpatrimonio_11" id="codpatrimonio_11" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CHAPA:</label><input type="text" class="form-control" placeholder="CHAPA" name="chapa_11" id="chapa_11" style="background-color: #f5f5f5" readonly></div>	
+			</div>
+		</div>
+		
+	</div>
+	
+	<div id="item_12" class="panel panel-info" style="display: none;">
+		<div class="panel-heading" style="padding: 10px 25px;"><i class="flaticon flaticon-converter icon-md" aria-hidden="true"></i></div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-7 atributos_patrimonio"><label>Patrimônio:</label><input type="text" class="form-control nomes_patrimonios" placeholder="Selecione o Patrimônio" onfocus="escolher_patrimonio(12)" name="patrimonio_12" id="patrimonio_12"></div>
+				<div class="col-md-5"><label>Localização:</label><input type="text" class="form-control" placeholder="Local" name="local_12" id="local_12" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-md-3 atributos_patrimonio"><label>Marca:</label><input type="text" class="form-control" placeholder="Marca" name="marca_12" id="marca_12" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Modelo:</label><input type="text" class="form-control" placeholder="Modelo" name="modelo_12" id="modelo_12" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Placa:</label><input type="text" class="form-control" placeholder="Placa" name="placa_12" id="placa_12" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Série:</label><input type="text" class="form-control" placeholder="Série" name="serie_12" id="serie_12" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Responsável Atual</label><input type="text" class="form-control" placeholder="Responsável" name="responsavel_12" id="responsavel_12" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px; display:none;">
+				<div class="col-md-3"><label>IDPATRIMONIO:</label><input type="text" class="form-control" placeholder="IDPATRIMÔNIO" name="idpatrimonio_12" id="idpatrimonio_12" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODCOLIGADA:</label><input type="text" class="form-control" placeholder="CODCOLIGADA" name="codcoligada_12" id="codcoligada_12" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODFILIAL:</label><input type="text" class="form-control" placeholder="CODFILIAL" name="codfilial_12" id="codfilial_12" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODPATRIMÔNIO:</label><input type="text" class="form-control" placeholder="CODPATRIMÔNIO" name="codpatrimonio_12" id="codpatrimonio_12" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CHAPA:</label><input type="text" class="form-control" placeholder="CHAPA" name="chapa_12" id="chapa_12" style="background-color: #f5f5f5" readonly></div>	
+			</div>
+		</div>
+	</div>
+	
+	<div id="item_13" class="panel panel-info" style="display: none;">
+		<div class="panel-heading" style="padding: 10px 25px;"><i class="flaticon flaticon-converter icon-md" aria-hidden="true"></i></div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-7 atributos_patrimonio"><label>Patrimônio:</label><input type="text" class="form-control nomes_patrimonios" placeholder="Selecione o Patrimônio" onfocus="escolher_patrimonio(13)" name="patrimonio_13" id="patrimonio_13"></div>
+				<div class="col-md-5"><label>Localização:</label><input type="text" class="form-control" placeholder="Local" name="local_13" id="local_13" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-md-3 atributos_patrimonio"><label>Marca:</label><input type="text" class="form-control" placeholder="Marca" name="marca_13" id="marca_13" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Modelo:</label><input type="text" class="form-control" placeholder="Modelo" name="modelo_13" id="modelo_13" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Placa:</label><input type="text" class="form-control" placeholder="Placa" name="placa_13" id="placa_13" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Série:</label><input type="text" class="form-control" placeholder="Série" name="serie_13" id="serie_13" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Responsável Atual</label><input type="text" class="form-control" placeholder="Responsável" name="responsavel_13" id="responsavel_13" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px; display:none;">
+				<div class="col-md-3"><label>IDPATRIMONIO:</label><input type="text" class="form-control" placeholder="IDPATRIMÔNIO" name="idpatrimonio_13" id="idpatrimonio_13" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODCOLIGADA:</label><input type="text" class="form-control" placeholder="CODCOLIGADA" name="codcoligada_13" id="codcoligada_13" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODFILIAL:</label><input type="text" class="form-control" placeholder="CODFILIAL" name="codfilial_13" id="codfilial_13" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODPATRIMÔNIO:</label><input type="text" class="form-control" placeholder="CODPATRIMÔNIO" name="codpatrimonio_13" id="codpatrimonio_13" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CHAPA:</label><input type="text" class="form-control" placeholder="CHAPA" name="chapa_13" id="chapa_13" style="background-color: #f5f5f5" readonly></div>	
+			</div>
+		</div>
+	</div>
+	
+	<div id="item_14" class="panel panel-info" style="display: none;">
+		<div class="panel-heading" style="padding: 10px 25px;"><i class="flaticon flaticon-converter icon-md" aria-hidden="true"></i></div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-7 atributos_patrimonio"><label>Patrimônio:</label><input type="text" class="form-control nomes_patrimonios" placeholder="Selecione o Patrimônio" onfocus="escolher_patrimonio(14)" name="patrimonio_14" id="patrimonio_14"></div>
+				<div class="col-md-5"><label>Localização:</label><input type="text" class="form-control" placeholder="Local" name="local_14" id="local_14" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-md-3 atributos_patrimonio"><label>Marca:</label><input type="text" class="form-control" placeholder="Marca" name="marca_14" id="marca_14" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Modelo:</label><input type="text" class="form-control" placeholder="Modelo" name="modelo_14" id="modelo_14" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Placa:</label><input type="text" class="form-control" placeholder="Placa" name="placa_14" id="placa_14" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Série:</label><input type="text" class="form-control" placeholder="Série" name="serie_14" id="serie_14" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Responsável Atual</label><input type="text" class="form-control" placeholder="Responsável" name="responsavel_14" id="responsavel_14" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px; display:none;">
+				<div class="col-md-3"><label>IDPATRIMONIO:</label><input type="text" class="form-control" placeholder="IDPATRIMÔNIO" name="idpatrimonio_14" id="idpatrimonio_14" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODCOLIGADA:</label><input type="text" class="form-control" placeholder="CODCOLIGADA" name="codcoligada_14" id="codcoligada_14" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODFILIAL:</label><input type="text" class="form-control" placeholder="CODFILIAL" name="codfilial_14" id="codfilial_14" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODPATRIMÔNIO:</label><input type="text" class="form-control" placeholder="CODPATRIMÔNIO" name="codpatrimonio_14" id="codpatrimonio_14" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CHAPA:</label><input type="text" class="form-control" placeholder="CHAPA" name="chapa_14" id="chapa_14" style="background-color: #f5f5f5" readonly></div>	
+			</div>
+		</div>
+	</div>
+	
+	<div id="item_15" class="panel panel-info" style="display: none;">
+		<div class="panel-heading" style="padding: 10px 25px;"><i class="flaticon flaticon-converter icon-md" aria-hidden="true"></i></div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-7 atributos_patrimonio"><label>Patrimônio:</label><input type="text" class="form-control nomes_patrimonios" placeholder="Selecione o Patrimônio" onfocus="escolher_patrimonio(15)" name="patrimonio_15" id="patrimonio_15"></div>
+				<div class="col-md-5"><label>Localização:</label><input type="text" class="form-control" placeholder="Local" name="local_15" id="local_15" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-md-3 atributos_patrimonio"><label>Marca:</label><input type="text" class="form-control" placeholder="Marca" name="marca_15" id="marca_15" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Modelo:</label><input type="text" class="form-control" placeholder="Modelo" name="modelo_15" id="modelo_15" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Placa:</label><input type="text" class="form-control" placeholder="Placa" name="placa_15" id="placa_15" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Série:</label><input type="text" class="form-control" placeholder="Série" name="serie_15" id="serie_15" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3 atributos_patrimonio"><label>Responsável Atual</label><input type="text" class="form-control" placeholder="Responsável" name="responsavel_15" id="responsavel_15" style="background-color: #f5f5f5" readonly></div>
+			</div>
+			<div class="row" style="margin-top: 10px; display:none;">
+				<div class="col-md-3"><label>IDPATRIMONIO:</label><input type="text" class="form-control" placeholder="IDPATRIMÔNIO" name="idpatrimonio_15" id="idpatrimonio_15" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODCOLIGADA:</label><input type="text" class="form-control" placeholder="CODCOLIGADA" name="codcoligada_15" id="codcoligada_15" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODFILIAL:</label><input type="text" class="form-control" placeholder="CODFILIAL" name="codfilial_15" id="codfilial_15" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CODPATRIMÔNIO:</label><input type="text" class="form-control" placeholder="CODPATRIMÔNIO" name="codpatrimonio_15" id="codpatrimonio_15" style="background-color: #f5f5f5" readonly></div>
+				<div class="col-md-3"><label>CHAPA:</label><input type="text" class="form-control" placeholder="CHAPA" name="chapa_15" id="chapa_15" style="background-color: #f5f5f5" readonly></div>	
+			</div>
+		</div>
+	</div>
+	
+	
+
+</div>
+
+
+</form>
+
+</div>
+
+</body>
+
+</html>
