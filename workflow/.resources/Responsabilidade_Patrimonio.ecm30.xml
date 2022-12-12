@@ -28,7 +28,7 @@
     <processDefinitionVersionPK>
       <companyId>1</companyId>
       <processId>Responsabilidade_Patrimonio</processId>
-      <version>7</version>
+      <version>12</version>
     </processDefinitionVersionPK>
     <versionDescription></versionDescription>
     <formId>0</formId>
@@ -43,7 +43,7 @@
     <processStates/>
     <favorito>false</favorito>
     <inheritFormSecurity>false</inheritFormSecurity>
-    <mobileReady>false</mobileReady>
+    <mobileReady>true</mobileReady>
   </ProcessDefinitionVersion>
   <list>
     <ProcessState>
@@ -111,7 +111,7 @@
       <joint>false</joint>
       <agreementPercentage>0</agreementPercentage>
       <engineAllocationId>Usuário</engineAllocationId>
-      <engineAllocationConfiguration>&lt;AssignmentController&gt;&lt;User&gt;b156d883-c291-49bf-bfdc-ef328edf0e9e&lt;/User&gt;&lt;/AssignmentController&gt;</engineAllocationConfiguration>
+      <engineAllocationConfiguration>&lt;AssignmentController&gt;&lt;User&gt;99d6dd20-74cd-44ff-940c-4e58d7c62ad7&lt;/User&gt;&lt;/AssignmentController&gt;</engineAllocationConfiguration>
       <selectColleague>1</selectColleague>
       <initialState>false</initialState>
       <notifyAuthorityDelay>true</notifyAuthorityDelay>
@@ -227,7 +227,7 @@
         <companyId>1</companyId>
         <processId>Responsabilidade_Patrimonio</processId>
         <expressionOrder>1</expressionOrder>
-        <version>7</version>
+        <version>12</version>
         <sequence>8</sequence>
       </conditionProcessStatePK>
       <condition>hAPI.getCardValue(&quot;aprovacao_patrimonio&quot;) == &quot;Aprovado&quot;</condition>
@@ -239,7 +239,7 @@
         <companyId>1</companyId>
         <processId>Responsabilidade_Patrimonio</processId>
         <expressionOrder>2</expressionOrder>
-        <version>7</version>
+        <version>12</version>
         <sequence>8</sequence>
       </conditionProcessStatePK>
       <condition>hAPI.getCardValue(&quot;aprovacao_patrimonio&quot;) == &quot;Reprovado&quot;</condition>
@@ -434,7 +434,7 @@
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Responsabilidade_Patrimonio</processId>
-        <version>7</version>
+        <version>12</version>
         <linkSequence>11</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -445,7 +445,7 @@
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Responsabilidade_Patrimonio</processId>
-        <version>7</version>
+        <version>12</version>
         <linkSequence>11</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>

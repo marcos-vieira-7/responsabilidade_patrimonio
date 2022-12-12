@@ -191,7 +191,7 @@ function carregar_contexto() {
 
 	//lista_patrimonios_modal = lista_patrimonios_modal + '</div>';
 	
-	listar_locais_estoque();
+	//listar_locais_estoque();
 
 }
 
@@ -256,45 +256,45 @@ function remover_item_tabela() {
 var lista_obras = "";
 var obras_carregadas = false;
 
-function listar_locais_estoque() {
-
-	var codColigada = 1;
-	console.log("listar_locais_estoque 1");
-	$.ajax({
-		url: "https://pelicanoconstrucoes127067.rm.cloudtotvs.com.br:8051/api/framework/v1/consultaSQLServer/RealizaConsulta/660607/1/G/",
-		dataType : "json",
-		type : "GET",
-		headers : {
-			"Authorization" : "Basic " + btoa("fluig" + ":" + "Centrium505050@@")
-		},
-		success : function(data) {
-			if (data.length == 0) {
-                alert("Falha ao consultar locais de estoque no RM, favor informar ao T.I");
-                console.log("Não foram encontrados locais de estoque, favor revisar consulta #660607");
-            }
-			
-			lista_obras = '<input type="text" class="form-control" style="margin-bottom: 10px;" placeholder="Procurar Obra" name="procurar_obra" id="procurar_obra" onkeyup="filtrar_obra_origem()">'
-			lista_obras = lista_obras + '<div class="list-group">';
-			for (var i = 0; i < data.length; i++) {
-				lista_obras = lista_obras
-					+ '<a class="list-group-item lista_obras_origem" onclick="definir_obra(`'
-					+ data[i].CODLOCAL + ' - '
-					+ data[i].NOME + '`)">'
-					+ data[i].CODLOCAL + ' - '
-					+ data[i].NOME + '</a>';
-			}''
-			lista_obras = lista_obras + '</div>';
-			obras_carregadas = true;
-			$("#obra_origem").prop("placeholder","Escolha a Obra de Origem");
-		},
-		error : function(erro) {
-			if (erro.responseJSON.Message == "Não foi possível consumir a licença no Slot 527: Erro: -1505 Message: Excedeu numero de licenças") {
-				alert("Estamos sem licenças, tente novamente mais tarde!");
-				console.log("Mensagem de erro: Sem licenças no RM");
-			}
-		}
-	})
-}
+//function listar_locais_estoque() {
+//
+//	var codColigada = 1;
+//	console.log("listar_locais_estoque 1");
+//	$.ajax({
+//		url: "https://pelicanoconstrucoes127067.rm.cloudtotvs.com.br:8051/api/framework/v1/consultaSQLServer/RealizaConsulta/660607/1/G/",
+//		dataType : "json",
+//		type : "GET",
+//		headers : {
+//			"Authorization" : "Basic " + btoa("fluig" + ":" + "Centrium505050@@")
+//		},
+//		success : function(data) {
+//			if (data.length == 0) {
+//                alert("Falha ao consultar locais de estoque no RM, favor informar ao T.I");
+//                console.log("Não foram encontrados locais de estoque, favor revisar consulta #660607");
+//            }
+//			
+//			lista_obras = '<input type="text" class="form-control" style="margin-bottom: 10px;" placeholder="Procurar Obra" name="procurar_obra" id="procurar_obra" onkeyup="filtrar_obra_origem()">'
+//			lista_obras = lista_obras + '<div class="list-group">';
+//			for (var i = 0; i < data.length; i++) {
+//				lista_obras = lista_obras
+//					+ '<a class="list-group-item lista_obras_origem" onclick="definir_obra(`'
+//					+ data[i].CODLOCAL + ' - '
+//					+ data[i].NOME + '`)">'
+//					+ data[i].CODLOCAL + ' - '
+//					+ data[i].NOME + '</a>';
+//			}''
+//			lista_obras = lista_obras + '</div>';
+//			obras_carregadas = true;
+//			$("#obra_origem").prop("placeholder","Escolha a Obra de Origem");
+//		},
+//		error : function(erro) {
+//			if (erro.responseJSON.Message == "Não foi possível consumir a licença no Slot 527: Erro: -1505 Message: Excedeu numero de licenças") {
+//				alert("Estamos sem licenças, tente novamente mais tarde!");
+//				console.log("Mensagem de erro: Sem licenças no RM");
+//			}
+//		}
+//	})
+//}
 
 /*
 function atualizar_obra() {
@@ -305,109 +305,108 @@ function atualizar_obra() {
 
 var modal_obras;
 var obra_selecionada = "origem";
+//function selecionar_obra(obraSelecionada) {
+//
+//	obra_selecionada = obraSelecionada;
+//	$('#processTabs', window.parent.document).hide();
+//	$("#workflowview-header", window.parent.document).hide();
+//
+//	if (obras_carregadas) {
+//		modal_obras = FLUIGC.modal({
+//			title : 'Selecione o Destino',
+//			content : lista_obras,
+//			id : 'fluig-modal'
+//
+//		}, function(err, data) {
+//			if (err) {
+//				// do error handling
+//			} else {
+//				// do something with data
+//			}
+//		});
+//	}
+//}
 
-function selecionar_obra(obraSelecionada) {
-
-	obra_selecionada = obraSelecionada;
-	$('#processTabs', window.parent.document).hide();
-	$("#workflowview-header", window.parent.document).hide();
-
-	if (obras_carregadas) {
-		modal_obras = FLUIGC.modal({
-			title : 'Selecione o Destino',
-			content : lista_obras,
-			id : 'fluig-modal'
-
-		}, function(err, data) {
-			if (err) {
-				// do error handling
-			} else {
-				// do something with data
-			}
-		});
-	}
-}
-
-function definir_obra(obra) {
-
-	if (obra_selecionada == "origem") {
-		$("#obra_origem").val(obra);
-		//$("#nDeControle").text(obra.split("-")[0] + "- 0000");
-
-	}
-	else if (obra_selecionada == "destino") {
-		$("#obra_destino").val(obra);
-	}
-
-	modal_obras.remove();
-	var grupo_obra_destino = obra.split("-")[0].trim();
-	var usuario_gestor_obra_destino;	
-	
-	//Obter email do gestor da obra de destino
-	$.ajax({
-		url: "https://pelicanoconstrucoes142642.fluig.cloudtotvs.com.br/api/public/wcm/group/findUsingFilter?limit=200",
-		dataType : "json",
-		type : "GET",
-		headers : {
-			"Authorization" : "Basic " + btoa("fluig" + ":" + "Centrium505050@@")
-		},
-		success : function(data) {
-			
-			$("#email_responsavel").val("");
-						
-			for(var i = 0; i<data.content.length; i++){
-				if(data.content[i].groupCode == grupo_obra_destino){
-					$("#email_responsavel").val(data.content[i].dataMap.emailFluigGestor);
-					usuario_gestor_obra_destino = data.content[i].dataMap.loginFluigGestor;
-				}
-			}
-			
-			if ($("#email_responsavel").val() == "") {
-                $("#semGestor").show();
-            }
-            else {
-                $("#semGestor").hide();
-            }
-			
-			//Obter matricula do gestor da obra de destino
-			$.ajax({
-				url: "https://pelicanoconstrucoes142642.fluig.cloudtotvs.com.br/api/public/2.0/users/listAll?limit=500",
-				dataType : "json",
-				type : "GET",
-				headers : {
-					"Authorization" : "Basic " + btoa("fluig" + ":" + "Centrium505050@@")
-				},
-				success : function(data) {
-					for(var i = 0; i < data.content.length; i++){
-						var loginGestor = data.content[i].login.toLowerCase();
-						if(loginGestor == usuario_gestor_obra_destino){
-							$("#matricula_gestor_destino").val(data.content[i].code);
-						}
-					}
-					if($("#matricula_gestor_destino").val() == ""){
-						$("#obraSemGestor").show();
-					}
-					else{
-						$("#obraSemGestor").hide();
-					}
-					
-				},
-				error : function(erro) {
-					console.log(erro);	
-				}
-			});
-			
-			matricula_gestor_destino
-		},
-		error : function(erro) {
-			console.log(erro);	
-		}
-	});
-	
-	$('#processTabs', window.parent.document).show();
-	$("#workflowview-header" , window.parent.document).show();
-	
-}
+//function definir_obra(obra) {
+//
+//	if (obra_selecionada == "origem") {
+//		$("#obra_origem").val(obra);
+//		//$("#nDeControle").text(obra.split("-")[0] + "- 0000");
+//
+//	}
+//	else if (obra_selecionada == "destino") {
+//		$("#obra_destino").val(obra);
+//	}
+//
+//	modal_obras.remove();
+//	var grupo_obra_destino = obra.split("-")[0].trim();
+//	var usuario_gestor_obra_destino;	
+//	
+//	//Obter email do gestor da obra de destino
+//	$.ajax({
+//		url: "https://pelicanoconstrucoes142642.fluig.cloudtotvs.com.br/api/public/wcm/group/findUsingFilter?limit=200",
+//		dataType : "json",
+//		type : "GET",
+//		headers : {
+//			"Authorization" : "Basic " + btoa("fluig" + ":" + "Centrium505050@@")
+//		},
+//		success : function(data) {
+//			
+//			$("#email_responsavel").val("");
+//						
+//			for(var i = 0; i<data.content.length; i++){
+//				if(data.content[i].groupCode == grupo_obra_destino){
+//					$("#email_responsavel").val(data.content[i].dataMap.emailFluigGestor);
+//					usuario_gestor_obra_destino = data.content[i].dataMap.loginFluigGestor;
+//				}
+//			}
+//			
+//			if ($("#email_responsavel").val() == "") {
+//                $("#semGestor").show();
+//            }
+//            else {
+//                $("#semGestor").hide();
+//            }
+//			
+//			//Obter matricula do gestor da obra de destino
+//			$.ajax({
+//				url: "https://pelicanoconstrucoes142642.fluig.cloudtotvs.com.br/api/public/2.0/users/listAll?limit=500",
+//				dataType : "json",
+//				type : "GET",
+//				headers : {
+//					"Authorization" : "Basic " + btoa("fluig" + ":" + "Centrium505050@@")
+//				},
+//				success : function(data) {
+//					for(var i = 0; i < data.content.length; i++){
+//						var loginGestor = data.content[i].login.toLowerCase();
+//						if(loginGestor == usuario_gestor_obra_destino){
+//							$("#matricula_gestor_destino").val(data.content[i].code);
+//						}
+//					}
+//					if($("#matricula_gestor_destino").val() == ""){
+//						$("#obraSemGestor").show();
+//					}
+//					else{
+//						$("#obraSemGestor").hide();
+//					}
+//					
+//				},
+//				error : function(erro) {
+//					console.log(erro);	
+//				}
+//			});
+//			
+//			matricula_gestor_destino
+//		},
+//		error : function(erro) {
+//			console.log(erro);	
+//		}
+//	});
+//	
+//	$('#processTabs', window.parent.document).show();
+//	$("#workflowview-header" , window.parent.document).show();
+//	
+//}
 
 
 function formata_data(data_string){
@@ -486,23 +485,23 @@ function definir_responsavel(nome, chapa, indice) {
 
 
 //Filtrar seleção de obra
-function filtrar_obra_origem() {
-	var conteudo_busca = $("#procurar_obra").val();
-	if (conteudo_busca.length > 0) {
-		$(".lista_obras_origem").each(function(index) {
-			if ($(this).text().toUpperCase().includes(conteudo_busca.toUpperCase())) {
-				$(this).show();
-			}
-			else {
-				$(this).hide();
-			}
-		});
-	} else {
-		$(".lista_obras_origem").each(function(index) {
-			$(this).show();
-		});
-	}
-}
+//function filtrar_obra_origem() {
+//	var conteudo_busca = $("#procurar_obra").val();
+//	if (conteudo_busca.length > 0) {
+//		$(".lista_obras_origem").each(function(index) {
+//			if ($(this).text().toUpperCase().includes(conteudo_busca.toUpperCase())) {
+//				$(this).show();
+//			}
+//			else {
+//				$(this).hide();
+//			}
+//		});
+//	} else {
+//		$(".lista_obras_origem").each(function(index) {
+//			$(this).show();
+//		});
+//	}
+//}
 
 
 
@@ -615,7 +614,7 @@ function definir_aprovacao_gestor() {
 	$("#nome_gestor_aprovador").text(usuario_logado);
 }
 
-
+var myModal;
 //Comportamento da aprovação do Patrimônio
 function definir_aprovacao_patrimonio() {
 	if ($("#aprovacao_patrimonio").val() == "Aprovado") {
@@ -893,6 +892,9 @@ function salvar_no_rm() {
 	console.log("patrimonios1==="+ patrimonios);
 	console.log("patrimonios==="+ JSON.stringify(patrimonios));
 	
+	if( $("#gravouNoRM").val() == "Sim" ){
+		alert("Você já gravou anteriormente o novo responsável pelos patrimônios informados.");
+	} else {
 		$.ajax({
 			url: "https://almox.pelicano.eng.br/patrimonio/cmi/Transferencia_Responsavel.php",
 			type: "POST",
@@ -900,6 +902,11 @@ function salvar_no_rm() {
 			success: function(data){
 				console.log(data);
 				$("#gravouNoRM").val("Sim");
+				if (data == "OK"){
+					alert("Dados salvos com sucesso no RM.");
+				}
+				myModal.remove();
+				myLoading2.hide();
 			},
 			error: function(erro){
 				console.log(erro);
@@ -908,6 +915,7 @@ function salvar_no_rm() {
 				alert("Erro ao salvar no RM, tente novamente daqui a alguns minutos, se persistir, informe ao T.I");
 			}
 		})
+	}
 }
 
 
